@@ -1,4 +1,5 @@
 using Api.GRRInnovations.SmartValidation.Filters;
+using Api.GRRInnovations.SmartValidation.Middlewares;
 using Api.GRRInnovations.SmartValidation.Services;
 using Microsoft.AspNetCore.Builder;
 
@@ -22,6 +23,8 @@ namespace Api.GRRInnovations.SmartValidation
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

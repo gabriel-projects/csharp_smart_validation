@@ -34,5 +34,18 @@ namespace Api.GRRInnovations.SmartValidation.Controllers
         {
             return Ok(new { Message = "User created successfully!" });
         }
+
+        [HttpPost("TestExeceptionHandler")]
+        public IActionResult TestExeceptionHandler(User user)
+        {
+            user = null;
+
+            if (user.UserName != null)
+            {
+
+            }
+
+            return Ok(new { Message = "User created successfully!" });
+        }
     }
 }
