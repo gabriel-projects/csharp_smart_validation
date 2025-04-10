@@ -1,4 +1,5 @@
 ﻿using Api.GRRInnovations.SmartValidation.Domain.Models;
+using Api.GRRInnovations.SmartValidation.Filters;
 using Api.GRRInnovations.SmartValidation.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,8 +16,8 @@ namespace Api.GRRInnovations.SmartValidation.Controllers
             _validationService = validationService;
         }
 
-        [HttpPost()]
-        public async Task<IActionResult> CreateUser(User user)
+        [HttpPost("CreateUser")]
+        public IActionResult CreateUser(User user)
         {
             var validationErrors = _validationService.Validate(user);
             if (validationErrors.Any())
@@ -24,6 +25,13 @@ namespace Api.GRRInnovations.SmartValidation.Controllers
                 return BadRequest(new { Error = validationErrors });
             }
 
+            return Ok(new { Message = "User created successfully!" });
+        }
+
+        [ServiceFilter(typeof(ValidationFilter))]
+        [HttpPost("ValidateUser")]
+        public IActionResult ValidateUser([FromBody] User user)
+        {
             return Ok(new { Message = "User created successfully!" });
         }
     }

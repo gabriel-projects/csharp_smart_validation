@@ -1,3 +1,4 @@
+using Api.GRRInnovations.SmartValidation.Filters;
 using Api.GRRInnovations.SmartValidation.Services;
 using Microsoft.AspNetCore.Builder;
 
@@ -16,6 +17,7 @@ namespace Api.GRRInnovations.SmartValidation
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddScoped<ValidationAttributesService>();
+            builder.Services.AddScoped<ValidationFilter>();
 
             var app = builder.Build();
 
